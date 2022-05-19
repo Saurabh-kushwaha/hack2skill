@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
-const URL = "mongodb+srv://saurabh:saurabh123@cluster0.hmdwt.mongodb.net/hack2skill"
+const URL =
+  "mongodb+srv://saurabh:saurabh123@cluster0.hmdwt.mongodb.net/hack2skill";
 module.exports = ()=>{
     mongoose.connect(URL)
     .then(()=>{

@@ -1,19 +1,24 @@
-import React, { useEffect, useState } from 'react'
+import React, {  useEffect, useState } from 'react'
 
 function Table() {
   const [data, setData] = useState([]);
+  const handle  = async () => {
+    try {
+     const res =  await fetch(`http://localhost:8000`)
+     const result = await res.json();
+     setData(result);
+    } catch (e) {
+      console.log(e);
+    }
+  }
   useEffect(() => {
-      fetch(`http://localhost:8000`)
-          .then((res) => res.json())
-          .then((d) => setData(d))
-          .catch((e) => console.log(e));
-  }, []); 
-  console.log(data);
+    handle()
+  }, []);
   return (
-    <div>
-      {data.map((e) => (
-        <Table key={e.id}>
-          <tr>
+    <table>
+      <tbody>
+        {data.map((e) => (
+          <tr key={e.id}>
             <td>{e.full_name}</td>
             <td>{e.email}</td>
             <td>{e.number}</td>
@@ -21,10 +26,9 @@ function Table() {
             <td>{e.team_name}</td>
             <td>{e.url}</td>
           </tr>
-        </Table>
-      ))}
-    </div>
+        ))}
+      </tbody>
+    </table>
   );
 }
-
 export default Table
